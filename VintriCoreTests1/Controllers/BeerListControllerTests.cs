@@ -66,7 +66,9 @@ namespace VintriCore.Controllers.Tests
 
             var r  = controller.GetAsync("buzz").Result;
 
-            Assert.Fail();
+
+            Assert.AreEqual(r.ToString(), "[{\"BeerId\":1,\"Username\":\"brendan@hotmail.com\",\"Rating\":3,\"Comments\":\"dnkjhe kfdj j fklje lfj pkel; j fkjfmk l\"}]");
+//            Assert.Fail();
         }
     }
 }
