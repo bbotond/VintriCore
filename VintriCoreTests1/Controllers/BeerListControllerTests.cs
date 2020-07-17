@@ -45,34 +45,50 @@ namespace VintriCore.Controllers.Tests
         public void GetAsyncTest()
         {
 
-            // Mock the handler
-            var handlerMock = new Mock<HttpMessageHandler>();
+            //            // Mock the handler
+            //            var handlerMock = new Mock<HttpMessageHandler>();
 
-//            handlerMock.
+            ////            handlerMock.
 
-            handlerMock.Protected()
-                       // Setup the PROTECTED method to mock
-                       .Setup<Task<HttpResponseMessage>>("GetAsync",
-                                                         ItExpr.IsAny<String>())
-                       // prepare the expected response of the mocked http call
-                       .ReturnsAsync(new HttpResponseMessage()
-                       {
-                           StatusCode = HttpStatusCode.OK
-                       })
-                       .Verifiable();
+            //            handlerMock.Protected()
+            //                       // Setup the PROTECTED method to mock
+            //                       .Setup<Task<HttpResponseMessage>>("GetAsync",
+            //                                                         ItExpr.IsAny<String>())
+            //                       // prepare the expected response of the mocked http call
+            //                       .ReturnsAsync(new HttpResponseMessage()
+            //                       {
+            //                           StatusCode = HttpStatusCode.OK
+            //                       })
+            //                       .Verifiable();
 
-            // use real http client with mocked handler here
-            IHttpClientFactory httpClient = (IHttpClientFactory)new HttpClient(handlerMock.Object)
-            {
-                BaseAddress = new Uri("http://test.com/"),
-            };
-
-
-            BeerListController controller = new BeerListController(httpClient, _hostingEnv.Object, _fileSystem.Object);
+            //            // use real http client with mocked handler here
+            //var httpClient = new HttpClient(handlerMock.Object)
+            //            {
+            //                BaseAddress = new Uri("http://test.com/"),
+            //            };
 
 
-            
-//            BeerListController controller = new BeerListController(_httpClient.Object, _hostingEnv.Object, _fileSystem.Object);
+
+
+            // create the mock client factory mock
+            var httpClientFactoryMock = new Mock<IHttpClientFactory>();
+
+            // setup the method call
+            httpClientFactoryMock.Setup(x => x.CreateClient(""))
+                                 .Returns(new HttpClient());
+
+
+
+
+            BeerListController controller = new BeerListController(httpClientFactoryMock.Object, _hostingEnv.Object, _fileSystem.Object);
+
+
+
+            //         BeerListController controller = new BeerListController(httpClient, _hostingEnv.Object, _fileSystem.Object);
+
+
+
+            //            BeerListController controller = new BeerListController(_httpClient.Object, _hostingEnv.Object, _fileSystem.Object);
 
             var r  = controller.GetAsync("buzz").Result;
 
