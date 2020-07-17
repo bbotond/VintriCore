@@ -141,7 +141,7 @@ namespace VintriCore.Controllers
                         punkBeers = await System.Text.Json.JsonSerializer.DeserializeAsync<List<BeerRatingViewModel>>(fs);
                     }
                 }
-                //combine the 2 collections and return json response
+                //combine the 2 collections collect beer type and list of comments left and return json response to client
                 return (from c in json
                        join p in punkBeers on c.id equals p.BeerId into ps
                        select new { c.id, c.name, c.description, userRatings = ps.Select(ds => new { ds.Rating, ds.Username, ds.Comments })});
@@ -151,12 +151,6 @@ namespace VintriCore.Controllers
         }
 
 
-
-
-
-
     }
-
-
 
 }
