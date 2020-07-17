@@ -16,6 +16,10 @@ namespace VintriCore.Controllers.Tests
     {
         readonly Mock<IHttpClientFactory> _httpClient;
         readonly Mock<IHostingEnvironment> _hostingEnv;
+
+        readonly Mock<Microsoft.AspNetCore.Hosting.IHostingEnvironment> _hostingEnv1;
+
+
         readonly Mock<IFileSystem> _fileSystem;
 
         readonly Fixture _fixture;
@@ -29,13 +33,20 @@ namespace VintriCore.Controllers.Tests
             _hostingEnv = new Mock<IHostingEnvironment>();
             _fileSystem = new Mock<IFileSystem>();
 
-    //        _httpClient.Setup(s => s.CreateClient().GetAsync(""));
+
+            _hostingEnv1 = new Mock<Microsoft.AspNetCore.Hosting.IHostingEnvironment>();
+
+
         }
 
 
         [TestMethod()]
         public void GetAsyncTest()
         {
+            BeerListController controller = new BeerListController(_httpClient.Object, _hostingEnv1.Object, _fileSystem.Object);
+
+            var r  = controller.GetAsync("buzz").Result;
+
             Assert.Fail();
         }
     }
