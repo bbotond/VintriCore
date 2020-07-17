@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VintriCore", "VintriCore\VintriCore.csproj", "{7ED214A8-0A24-4210-9141-CE05E2C8EDD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VintriCoreTests", "VintriCoreTests\VintriCoreTests.csproj", "{B15C0BA9-85F3-4D87-8191-D6F83AB7294F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VintriCoreTests1", "VintriCoreTests1\VintriCoreTests1.csproj", "{A717FD66-CE1E-47D4-9955-C8FD28413F4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7ED214A8-0A24-4210-9141-CE05E2C8EDD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ED214A8-0A24-4210-9141-CE05E2C8EDD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ED214A8-0A24-4210-9141-CE05E2C8EDD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B15C0BA9-85F3-4D87-8191-D6F83AB7294F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B15C0BA9-85F3-4D87-8191-D6F83AB7294F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B15C0BA9-85F3-4D87-8191-D6F83AB7294F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B15C0BA9-85F3-4D87-8191-D6F83AB7294F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A717FD66-CE1E-47D4-9955-C8FD28413F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A717FD66-CE1E-47D4-9955-C8FD28413F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A717FD66-CE1E-47D4-9955-C8FD28413F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A717FD66-CE1E-47D4-9955-C8FD28413F4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
