@@ -30,6 +30,8 @@ namespace VintriCore
             services.AddHttpClient();
             services.AddScoped<IFileSystem, FileSystem>();
 
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

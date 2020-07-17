@@ -75,9 +75,6 @@ namespace VintriCore.Models
         /// </summary>
         public string description { get; set; }
 
-
     }
-
-
 
 }

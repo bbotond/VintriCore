@@ -39,8 +39,6 @@ namespace VintriCore.Controllers
         /// <param name="id">The beer Id in Punk to search for</param>
         /// <param name="rating">object representing user rating, email and comment about the beer</param>
         /// <returns>status message showing if the request was successful or failed</returns>
-        /// 
-
         //mvccore 2.2 [ApiController automatically performs the validation check that the action filter did in .Net webapi]
         //[Filters.VintriFilter]
         public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsync([FromQuery]int id, [FromBody]BeerRatingViewModel rating)
@@ -117,10 +115,10 @@ namespace VintriCore.Controllers
 
         // GET api/<controller>/5
         /// <summary>
-        /// 
+        /// REST API endpoint to retrieve a list of beers.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">the name of the beer to collect from the punk api</param>
+        /// <returns>josn result of the selected beer and all of its ratings in database.json</returns>
         [HttpGet("{id}")]
         public async System.Threading.Tasks.Task<IEnumerable<dynamic>> GetAsync(string id)
         {
