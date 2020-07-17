@@ -10,14 +10,13 @@ namespace VintriCore.Models
 {
     public class Db_Json_Path
     {
-        public string database_json_Path => _env.WebRootPath +(@"/App_Data/Database.json");
+        public string database_json_Path => _env.ContentRootPath +(@"/App_Data/Database.json");
 
         readonly IHostingEnvironment _env;
 
         public Db_Json_Path(IHostingEnvironment env)
         {
-            _env = env;
-            
+            _env = env;            
         }
 
 

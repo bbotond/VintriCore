@@ -62,20 +62,22 @@ namespace VintriCore.Controllers
                     var val = json.First();
                     //pass values frombody into values collected from punk api 
                     val.BeerId = id; val.Comments = rating.Comments; val.Rating = rating.Rating; val.Username = rating.Username;
+
+                    Db_Json_Path db_Json_Path = new Db_Json_Path(_env);
                     try
                     {
                         List<BeerRatingViewModel> punkBeers = new List<BeerRatingViewModel>();
                         //check and load any entrys in database.json
-                        if (_fileSystem.File.Exists(_env.ContentRootPath + (@"/App_Data/Database.json")))
+                        if (_fileSystem.File.Exists(db_Json_Path.database_json_Path))
                         {
-                            using (FileStream fs = (FileStream)_fileSystem.File.OpenRead(_env.ContentRootPath + (@"/App_Data/Database.json")))
+                            using (FileStream fs = (FileStream)_fileSystem.File.OpenRead(db_Json_Path.database_json_Path))
                             {
                                 punkBeers = await System.Text.Json.JsonSerializer.DeserializeAsync<List<BeerRatingViewModel>>(fs);
                             }
                         }
                         punkBeers.Add(val);
                         //write out the new database.json file
-                        using (FileStream fs = (FileStream)_fileSystem.File.OpenWrite(_env.ContentRootPath + (@"/App_Data/Database.json")))
+                        using (FileStream fs = (FileStream)_fileSystem.File.OpenWrite(db_Json_Path.database_json_Path))
                         {
                             await System.Text.Json.JsonSerializer.SerializeAsync(fs, punkBeers);
                         }
@@ -128,14 +130,15 @@ namespace VintriCore.Controllers
             HttpResponseMessage response = await client.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
+                Db_Json_Path db_Json_Path = new Db_Json_Path(_env);
                 var Samochod = response.Content.ReadAsStringAsync();
                 List<PunkBeerViewModel> json = JsonConvert.DeserializeObject<List<PunkBeerViewModel>>(Samochod.Result);
 
                 //load the data from database.json
                 List<BeerRatingViewModel> punkBeers = new List<BeerRatingViewModel>();
-                if (_fileSystem.File.Exists(_env.ContentRootPath + (@"\App_Data\Database.json")))
+                if (_fileSystem.File.Exists(db_Json_Path.database_json_Path))
                 {
-                    using (FileStream fs = (FileStream)_fileSystem.File.OpenRead(_env.ContentRootPath + (@"/App_Data/Database.json")))
+                    using (FileStream fs = (FileStream)_fileSystem.File.OpenRead(db_Json_Path.database_json_Path))
                     {
                         punkBeers = await System.Text.Json.JsonSerializer.DeserializeAsync<List<BeerRatingViewModel>>(fs);
                     }
