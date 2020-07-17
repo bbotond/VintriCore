@@ -13,6 +13,7 @@ using Moq.Protected;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using System.Net.Http.Formatting;
 using System.Net;
+using System.IO;
 
 namespace VintriCore.Controllers.Tests
 {
@@ -45,31 +46,6 @@ namespace VintriCore.Controllers.Tests
         public void GetAsyncTest()
         {
 
-            //            // Mock the handler
-            //            var handlerMock = new Mock<HttpMessageHandler>();
-
-            ////            handlerMock.
-
-            //            handlerMock.Protected()
-            //                       // Setup the PROTECTED method to mock
-            //                       .Setup<Task<HttpResponseMessage>>("GetAsync",
-            //                                                         ItExpr.IsAny<String>())
-            //                       // prepare the expected response of the mocked http call
-            //                       .ReturnsAsync(new HttpResponseMessage()
-            //                       {
-            //                           StatusCode = HttpStatusCode.OK
-            //                       })
-            //                       .Verifiable();
-
-            //            // use real http client with mocked handler here
-            //var httpClient = new HttpClient(handlerMock.Object)
-            //            {
-            //                BaseAddress = new Uri("http://test.com/"),
-            //            };
-
-
-
-
             // create the mock client factory mock
             var httpClientFactoryMock = new Mock<IHttpClientFactory>();
 
@@ -77,18 +53,16 @@ namespace VintriCore.Controllers.Tests
             httpClientFactoryMock.Setup(x => x.CreateClient(""))
                                  .Returns(new HttpClient());
 
+            var fileMock = new Mock<IFileSystem>();
+            fileMock.Setup(x => x.File.OpenRead(""))
+                .Returns(new MemoryStream(Encoding.UTF32.GetBytes("[{\"BeerId\":1,\"Username\":\"brendan@hotmail.com\",\"Rating\":3,\"Comments\":\"dnkjhe kfdj j fklje lfj pkel; j fkjfmk l\"}]")));
 
+            var hostMock = new Mock<Microsoft.AspNetCore.Hosting.IHostingEnvironment>();
+            hostMock.Setup(x => x.ContentRootPath)
+                .Returns(@"C:\Users\bboto\source\repos\VintriCore\VintriCore\");
 
+            BeerListController controller = new BeerListController(httpClientFactoryMock.Object, _hostingEnv.Object, fileMock.Object);
 
-            BeerListController controller = new BeerListController(httpClientFactoryMock.Object, _hostingEnv.Object, _fileSystem.Object);
-
-
-
-            //         BeerListController controller = new BeerListController(httpClient, _hostingEnv.Object, _fileSystem.Object);
-
-
-
-            //            BeerListController controller = new BeerListController(_httpClient.Object, _hostingEnv.Object, _fileSystem.Object);
 
             var r  = controller.GetAsync("buzz").Result;
 
